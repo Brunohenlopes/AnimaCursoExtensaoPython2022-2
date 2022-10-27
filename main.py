@@ -15,12 +15,30 @@ idade = int(input("Digite sua idade:"))
 print("Sua idade é {}" .format (idade))
 soma = idade*2
 print("idade ao dobro é: {}".format(soma))
+if (idade >= 18):
+  print("Você pode dirigir ou  beber")
+
+ 
+else:
+  print("Você não pode beber e nem dirigir")
+genero = input("Informe seu gênero: \nM:Masculino e F=Femnino: ")
+if idade >= 18 and genero == "M":
+  print("Você precisa prestar serviço militar obrigatório")
+else:
+  print("Seu gênero é feminino")
+  
+ 
+ 
 
 
 
 
 
 
-'''
-Comentario em bloco
-'''
+
+
+
+
+
+
+
