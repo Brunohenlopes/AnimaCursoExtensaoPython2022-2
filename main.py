@@ -47,10 +47,12 @@ frutas = ["morango","laranja","maçã","manga"]
 #print(frutas[2])
 #print(len(frutas))
 #frutas.append("manga")
-i = 0
+'''i = 0
 while (i<4):    
   print(frutas[i])
-  i = i + 1
+  i = i + 1'''
+for frutas in frutas:
+  print(frutas)
   
 
   
