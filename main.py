@@ -43,7 +43,7 @@ while(contador <= 10):
   print(contador)
   contador = contador + 1'''
 
-frutas = ["morango","laranja","maçã","manga"]
+'''frutas = ["morango","laranja","maçã","manga"]'''
 #print(frutas[2])
 #print(len(frutas))
 #frutas.append("manga")
@@ -51,9 +51,34 @@ frutas = ["morango","laranja","maçã","manga"]
 while (i<4):    
   print(frutas[i])
   i = i + 1'''
-for frutas in frutas:
-  print(frutas)
-  
+'''for frutas in frutas:
+  print(frutas)'''
+
+#criação de funções 
+
+'''preco = 1999.90
+imposto = preco * 0.05
+print(imposto)
+
+preco2 = 100
+imposto2 = preco2 * 0.05
+print(imposto2)'''
+
+'''https://www.w3schools.com/python/python_functions.asp'''
+
+def calcular_imposto(preco_produto):
+  imposto = preco_produto * 0.07
+  return imposto
+
+#Aqui é o uso... aqui é imposto a calcular.. e exibir na tela
+preco = 299
+imposto = calcular_imposto(preco)
+print(imposto)
+
+valores = [1.99,24.50,78.27,1515.5]
+for valor in valores:
+ print(f"O imposto de {valores} é {calcular_imposto(valor)}")
+
 
   
 
