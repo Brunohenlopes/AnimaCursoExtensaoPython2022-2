@@ -78,7 +78,82 @@ print(imposto)
 valores = [1.99,24.50,78.27,1515.5]
 for valor in valores:
  print(f"O imposto de {valores} é {calcular_imposto(valor)}")
+#Importa nosso arquivo Pessoa.py no diretório model
+from model.Pessoa import Pessoa
+from database.Database import Database
+from dao.PessoaDAO import PessoaDAO
 
+#Exemplo de uso
+poyatos = Pessoa(1, "Henrique Poyatos")
+print(poyatos)
+
+#Quero mostrar só o nome
+print(poyatos.nome)
+
+print("DAQUI PRA FRENTE É ACESSO AO BANCO...")
+
+#Chama o objeto de banco de dados
+db = Database()
+
+#Instancia o objeto
+pessoaDAO = PessoaDAO(db.conexao, db.cursor)
+
+#Quero carregar uma lista com o que veio do banco de dados
+pessoas = pessoaDAO.getAll(orderBy=True)
+for pessoa in pessoas:
+  print(pessoa)
+
+
+#Criar um objeto com qualquer ator/atriz/diretor/diretora
+novo = Pessoa(0, "Denzel Washington")
+
+#Olha que simples...
+novo = pessoaDAO.save(novo)
+
+#consulta o banco de novo..
+pessoas = pessoaDAO.getAll(orderBy=True)
+for pessoa in pessoas:
+  print(pessoa)
+#faz um ajuste estratégico no dao/PessoaDAO.py
+from model.Pessoa import Pessoa 
+
+class PessoaDAO:
+  conexao = None
+  cursor = None
+
+  def __init__(self, con, cur):
+    self.conexao = con
+    self.cursor = cur
+
+  def getAll(self, orderBy = False):
+    sql = "SELECT id, nome FROM pessoa "
+    if orderBy == True:
+      sql = sql + " ORDER BY nome"
+    
+    try:
+      self.cursor.execute(sql)
+      resultado = self.cursor.fetchall()
+
+      pessoas = []
+      for linha in resultado:
+        pessoa = Pessoa(linha[0], linha[1])
+        pessoas.append(pessoa)
+
+      return pessoas
+    except Exception as e:
+      return e
+
+  #Função/método para inserir no banco.
+  def save(self, pessoa):
+    sql = "INSERT INTO pessoa (nome) VALUES (%s)"
+
+    try:
+      self.cursor.execute(sql, pessoa.nome)
+      self.conexao.commit()
+      pessoa.id = self.cursor.lastrowid 
+      return pessoa
+    except Exception as e:
+      return e
 
   
 
